@@ -48,4 +48,4 @@ _flutter.loader.load({
     renderer: 'canvaskit',
     canvasKitVariant: 'auto',
   },
-});
+}).catch(() => window.chaoskroeteLoadingFailed?.());

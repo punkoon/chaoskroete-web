@@ -1,46 +1,50 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="/chaoskroete-web/">
-
   <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Kleine Kröte. Große Hindernisse.">
-
-  <!-- iOS meta tags & icons -->
+  <meta name="theme-color" content="#35b1cd">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Chaoskröte">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
-
-  <title>Chaoskröte</title>
+  <link rel="icon" type="image/png" sizes="48x48" href="favicon-frog.png">
   <link rel="manifest" href="manifest.json">
+  <title>Chaoskröte</title>
+  <style>
+    html, body { margin: 0; min-height: 100%; background: #35b1cd; }
+    #app-loading { position: fixed; inset: 0; z-index: 9999; display: grid;
+      place-items: center; background: #35b1cd; color: white; font: 16px system-ui, sans-serif; }
+    .loading-content { max-width: 24rem; padding: 24px; text-align: center; }
+    .loading-icon { width: 112px; height: 112px; border-radius: 24px; }
+    h1 { font-size: 28px; margin: 20px 0 12px; }
+    p { line-height: 1.5; }
+    .loading-dots { display: flex; justify-content: center; gap: 8px; margin: 24px 0; }
+    .loading-dots span { width: 9px; height: 9px; background: white; animation: hop 1s ease-in-out infinite; }
+    .loading-dots span:nth-child(2) { animation-delay: .15s; }
+    .loading-dots span:nth-child(3) { animation-delay: .3s; }
+    @keyframes hop { 0%, 60%, 100% { transform: translateY(0); opacity: .5; }
+      30% { transform: translateY(-9px); opacity: 1; } }
+    #loading-retry { padding: 12px 20px; border: 2px solid white; border-radius: 10px;
+      color: #153b3d; background: white; font: inherit; cursor: pointer; }
+    [hidden] { display: none !important; }
+    @media (prefers-reduced-motion: reduce) { .loading-dots span { animation: none; } }
+  </style>
 </head>
 <body>
-  <!--
-    You can customize the "flutter_bootstrap.js" script.
-    This is useful to provide a custom configuration to the Flutter loader
-    or to give the user feedback during the initialization process.
-
-    For more details:
-    * https://docs.flutter.dev/platform-integration/web/initialization
-  -->
+  <div id="app-loading" role="status" aria-live="polite">
+    <div class="loading-content">
+      <img class="loading-icon" src="icons/Icon-192.png" alt="" width="112" height="112">
+      <h1>Chaoskröte</h1>
+      <p id="loading-message">Die Chaoskröte macht sich bereit …</p>
+      <div class="loading-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+      <p id="loading-error" hidden>Das Chaos lässt auf sich warten. Bitte versuche es noch einmal.</p>
+      <button id="loading-retry" type="button" hidden>Erneut laden</button>
+      <noscript><p>Bitte aktiviere JavaScript, um Chaoskröte zu spielen.</p></noscript>
+    </div>
+  </div>
+  <script src="loading.js"></script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
